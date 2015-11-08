@@ -1,0 +1,46 @@
+This program simulates a ferris wheel rotating in a clockwise direction.
+
+From the user's perspective, the program seems very simple. It has a wheel
+with buckets that are at a fixed angle. The wheel rotates at a fixed speed,
+until it receives an input of 's', 'f', or 'q'. Typing 's' will slow the
+rotation speed down. This command will work several times, until it gets to 
+a minimum speed, where it will flip the clockwise rotation to a counterclockwise 
+rotation. The wheel will then respond to the 's' command by speeding up in the 
+counterclockwise direction. The same applies to the 'f' key in the clockwise
+direction. The 'q' key quits running the program. In theory, the 's' and 'f'
+keys rotate the wheel faster in the counterclockwise and clockwise directions, 
+respectively.
+
+From a programmer's perspective, the ferris wheel consists of multiple outputs
+of lines and circles, all combining to form a perfect ferris wheel shape.
+There are two functions, the drawBucket function and the drawFerrisWheel
+function. The drawBucket function only draws one bucket give then inputs of
+the center of that particular bucket, but it seemed very necessary in order to
+efficiently draw many buckets repeatedly. The other function drawFerrisWheel
+is designed to draw the grass (25 lines across the bottom of the screen), the
+ferris wheel base and wheel itself (two lines touching in the center, and two
+circles of slightly different radii around the center), and then calls the
+drawBucket function 8 times, each for a different angle around a circle,
+ensuring they were evenly spaced. Each bucket is a trapezoid of four lines,
+and has a circle around its center of radius 2 (which looks like a bolt). Each
+bucket also have a line from the center of the screen (also the center of the
+ferris wheel) to the center of that bucket (which, graphically, acts as a support for the
+bucket). The array for the centers of each bucket is also calculated in the
+function. This is done using a for loop, and spaces each bucket out pi/4 or 45
+degrees apart. 
+As far as the animation goes, the angle at which the first bucket is drawn is
+changed, and each subsequent bucket updates accordingly. The angle can be
+increased or decreased, depending if the wheel is truning clockwise or
+counterclockwise. After each drawing is completed, there is a command,
+usleep(speed), which pauses the code for a certain amount of time. By editing
+the variable speed, we can make the wheel spin faster or slower. This variable
+is updated with a switch statement. The key 'f' will increase the speed (lower
+variable speed) if the wheel is already turning clockwise, but slow it down if
+the wheel is going counterclockwise. The 's' key does the opposite. If the
+speed gets to its minimum value (48000), then it will flip the wheel (by
+changing the sign of the variable ccw).
+
+I have verified the output of this program by running it repeatedly and using
+the three input keys 's' 'f' and 'q', along with other keys. The three input
+keys do what they are designed to do, and the other keys do not affect the
+program. This shows that the program works as designed.

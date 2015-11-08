@@ -1,0 +1,60 @@
+This program takes an input of words and places them into a crossword puzzle.
+The user must input a number of words followed by the return key after each
+word. This populates the word array with each word entered. No word can have
+more than 15 letters and the program only accepts letters, not symbols. 
+From a user's perspective, these words are entered, followed by a '.' to end
+the entering process. From here, if the board can be created, the solution is
+displayed, along with the puzzle itself and clues. 
+
+From a programmer's perspective, the program enters the strings into the array
+"words" which is a 2D array of char. This is then sorted from longest to
+shortest so that the longest word can be placed in the center of the board.
+The next function creates a board, a 15x15 2D array of char, all initialized
+to '.' There are six functions that all attempt to place the words onto the
+board. First, the longWord function places the longest word in the center row
+of the board horizontally. Then the placeWords function is called to place the
+other words. In each iteration of this function, it first decides whether to
+place the next word horizontally or vertically. If there are currently more
+horizontal than vertical, it will attempt a vertical placement, otherwise it
+will attempt a horizontal placement first. The functions placeVertical and
+placeHorizontal both do essentialy the same task. For each letter in the word
+trying to be placed, they try to find a letter on the board that corresponds.
+If this letter is found, then the validVertical or validHorizontal function is
+called to determine whether the word if placed there can satisfy all of the
+crossword puzzle conditions. For example, no two words can be next to each
+other, and no two words can be attached to the same letter of a third word.
+Also, when a word is placed, it should only be able to overlap one word at the 
+time of placement. These factors are all covered by the validVertical and
+validHorizontal functions.
+If these functions return valid, then the placeHorizontal and placeVertical
+will place the word onto the board in their designated spot. The functions
+will also record the indicies of the first letter and the orientation of
+placement (horizontal/vertical) in an array. 
+The function placeWords also has a randomization in case a certain permutation
+of words does not work on the board. The order initially is for the words to
+be placed in order of largest to smallest, given that would be the best
+likelihood that all words can be placed. However, if this does not work,
+placeWords calls a function randomizeWords that randomizes the order of the
+remaining words. This will take the words already placed on the board and
+leave them there, and then randomize the order of the words to see if a
+different permutation of words can be successfully placed. This has
+dramatically increased the rate of success for placing all words onto the
+board. If all words are not able to be placed, even with the randomizer, then
+the board is cleared and the whole array of words is randomized. This new
+randomization allows even higher rates of success. 
+After all words are put on the board properly, the board gets printed using a
+double for loop. Then taking the solved crossword and using isalpha on each
+individual element, the unsolved puzzle is created and printed. Lastly, the
+words are jumbled using the anagram function and their clues are printed out. 
+
+The program works very well for most words placed into the array. However, due
+to the use of the random number generator, the results are not perfect.
+Sometimes it takes a few iterations of the same words to actually generate the
+correct board. Also, it does not generate the board in the same way as the
+example. While this is not necessarily bad, the generated boards do look
+different. I could not come up with an efficient algorithm that tests every
+permutation of words entered, and the brute force algorithm would take
+millions of iterations. For this reason, I was willing to sacrifice some
+accuracy for the sake of conserving time and memory. The program works very
+well and though it does not produce a crossword every possible time, after a
+few iterations it creates one very consistently.

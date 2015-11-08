@@ -1,0 +1,21 @@
+This program takes a file filled with sayings and reads it into an array which the user can then manipulate. The user's options are:
+-display all sayings currently in the database
+-enter a new saying into the database
+-list sayings that contain a given word (substring) entered by the user
+-save all sayings in a new text file
+-quit the program
+
+From a programmer's perspective, it opens a file and reads the sayings in using a fgets function. Then it displays options to the user and responds to the user's input. There are functions for each different type of input. These funcitons are getSayings, displaySayings, newSaying, containsWord, and saveToFile.
+The program uses indexing in order to access full rows in the array to which
+the data is saved. To add a new saying the program uses gets (while this is
+unsafe, there is a low possibility that the saying entered is longer than 80
+characters. 
+
+The program does not have the ability to find a
+word that is in one or more sayings. Outside of this the program works well to
+access a file, download the data, then manipulate the data in the array, and
+finally save this new data to a file of the user's choosing.
+
+While the program's functions all work for the most part, there waas no way to
+test many different iterations of the program due to time constraints. Outside
+of the find word part of the assignment, the program works quite well. 

@@ -1,0 +1,52 @@
+This program is a simulation of Conway's Game of Life. It is a basic
+simulation with each generation of cells following from the next. The rules
+that the game follows are:
+1) a dead cell with 3 neighbors becomes live
+2) only a live cell with 2 or 3 neighbors survives, all others die
+
+The user has the option of either entering the coordinates manually or giving
+a file name from which the program reads the input. The input has a few
+options:
+a - add a new cell
+r - remove an existing cell
+n - advances to the next generation
+q - quit the program
+p - play continuously forever
+
+Using these commands, the user can create an initial condition and loop
+through one generation at a time. This can be useful to observe initial
+patterns. 
+
+From a coding perspective, the program is relatively simple. There are
+functions to add a cell and remove a cell, both take the inputs for the
+present board array and coordinates for where to add or remove the cell. They
+update the board and exit the functions. The other function is the nextLife
+function, which essentially moves the board to the next generation. It loops
+through every element with a double for loop, and for each element calculates
+the number of neighbors it has (using the function neighbors). It then follows
+the rules of the game to determine whether the next generation cell should be
+alive or dead. It then updates the future array with either 'X' or ' ',
+depending on how many neighbors it has. Then the present array is updated with
+the values from the future array. This nextLife funciton is called when the
+user inputs n (function is called once) or p (function is called in an
+infinite while loop). 
+The function neighbors uses looping to determine how many neighbors there are
+around a given cell. With the exception of the outsides, each cell has 8
+neighbors. The function is created in a way that loops through all 8, but
+ignores any that are out of bounds (as to avoid a segfault). 
+
+The program works well and has been tested for many different known simulations,
+such as the Gosper gun to produce an infinite amount of gliders.
+
+Some of the scenes are quite cool, such as scene5. It was initially found due
+to an error in entering a different pattern, but the complexity of the
+explosion is extremely interesting.
+
+Scene 1 has 4 different still patterns
+Scene 2 has 4 different oscillators
+Scene 3 has 4 different moving objects, including a glider, and a small,
+medium and large spaceship
+Scene 4 shows an explosion that dies down into four still objects
+Scene 5 shows an explosion that looks like it will die down multiple times,
+but ends up producing more life repeatedly
+

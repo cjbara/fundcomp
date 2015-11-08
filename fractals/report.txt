@@ -1,0 +1,103 @@
+The fractals program takes eight different designs and uses recursive
+functions to display these patterns. When the program is run, the user has the
+option to display one of the eight patterns by pressing the assigned number
+key. The eight different keys that show a corresponding pattern are as follows: 
+1: Sierpinski Triangles
+2: Shrinking Squares
+3: Spiral Squares
+4: Circular Lace
+5: Snowflake
+6: Tree
+7: Fern
+8: Spiral of Spirals
+
+From an internal perspective, the main prgram is made up of a switch statement
+inside of a while loop. The program waits for an input from the user using
+gfx_wait(), and this input is stored in the variable fractal. This then checks
+the input in a switch statement, and for each of the numbers 1-8, it calls the
+recursive function to display that particular fractal. The input of the letter
+'q' breaks the while loop and ends the program.
+Each recursive funtion has three steps: a base case, which checks whether to
+continue recursing or to break the recursive calls; a drawing step, which
+draws something (based on the pattern); and a recursive step, which calls the
+function again, thus creating the recursion that forms all of the patterns.
+Each individual pattern varies in the amount of drawing steps and the amount
+of recursive steps. 
+The Sierpinski Triangles have one base case: the function stops recursing when
+the triangles have a top side length of 3 pixels. This funtion has three
+drawing cases, one for each of the three smaller triangles drawn within the
+biggest triangle. Then there are three recursive calls: one to repeat the
+function in the top left triangle, one for the top right, and one for the
+bottom triangle. These recursive calls allow the pattern to be drawn with only
+three draw calls in the function.
+The shrinking squares' base case occurs when half of the side length of the
+next square is less than or equal to one. The funtion has four drawing
+steps: it draws four new squares with the center of each square at one of the
+four corners of the previous square. The recursion then calls the function on
+each of these new four squares, causing four more to be drawn for each
+function call until the base case is reached. The length of the sides of the
+square is half the length of the previous iteration.
+The spiral of squares draws one square per function and recurses until the
+base case is reached. The base case is that the side length of the square
+drawn is less than 2. Each iteration, the angle of the spiral changes by pi/5
+radians and the length from the center of the screen to the center of the
+square being drawn is reduced by a factor of .9
+The circular lace is a circle with six evenly spaced circles around the edge.
+The recursion calls this on each smaller circle until the radius of the circle
+being drawn is 1 or less. Each new circle around the previous circle has a
+radius of 1/3 times the previous circle's radius.
+Snowflake has five lines branching out from a center point, and then the
+function is called from each of the tips of the lines. The tips then act as a
+new center, from which five new lines are drawn. The abse case is when the
+lines are less than pixel length 1.
+Tree is a line with two new lines branching off from it. The function actually
+only draws one line per iteration, but calculates two new angles to use in the
+next iteration. Each new line is 2/3 times the previous line length, and each
+new branch is at a 30 degree angle from the previous branch. It recurses until
+the branch has a length of 0 pixels
+Fern has one drawing step, the maing branch, but also calculates the four
+locations to draw the next branch, and the angles from which to draw them. The
+function then calls the next iteration for each of these eight cases (for the
+eight branches of the next fern). The fern keeps recursing until the length of
+a branch is 1 pixel.
+Spiral of spirals is not entirely correct, but it has some good aspects to it.
+Its drawing step is only a single point that is called twice. The base case
+happens when the length from the center of a spiral to the outside is 0.
+
+Each of these fractals runs well when called by the program. Each function 
+successfully calls itself until it reaches the base case, as shown by the
+pretty outputted fractals. 
+
+
+The gallery is a winter wonderland that has 100 snowflakes falling down and
+blowing in the wind. Each snowflake is at a different angle, and is a
+different color than the others. The wind is also randomized so it blows left
+25%, blows right 25%, and does not blow 50% of the time. When a snowflake
+leaves the screen on the left, it goes to the right side. When It leaves the
+screen on the right it goes to the left side. When it gets to the bottom, it
+is drawn again at the top. This effect allows continuous snowfall; giving the
+effect of infinite snowflakes, though it is only 100 total. Whenever a key is
+pressed, it rerandomizes the snowflakes and creates a new batch of them. The
+program ends when the 'q' key is pressed.
+
+The program starts by initializing each of the snowflakes' attributes: color,
+size, and x and y position. These are all stored into the ith element of their
+particular arrays. Next, the program enters a while loop, causing continuous
+snowfall until a key is pressed. This loop draws the sky, with a gradient
+created by changing the color each loop of the for loop. This causes the nice
+fade from blue to a more grayish color. Next, each of the individual
+snowflakes is drawn using a for loop and the snowflake fractal program. Within
+the for loop, it updates the x and y position for each of the snowflakes. The
+y is always increased by 5 (each flake falls 5 pixels downward per iteration.
+The x is altered by 5 pixels right or left (to simulate air resistance) along
+with the wind value (which is either 10 pixels to the left or right, or 0). The
+wind is randomized, so it can occur at any time. The wind stays constant for
+10 iterations of the animation, and then it is again randomized. This allows
+for a smooth wind to blow for a while and then be changed. Without this wait
+for 10 loops, the wind blows extremely sporadically. In the program, there is
+also a loop to draw a sun, but it was commented out because the sun slowed
+down the animation and made it spotty.
+
+The program works very well, as shown by the continuous nature of the
+snowflakes falling and also the rerandomization of each snowflake's size,
+angle, color and position whenever a key is pressed.
